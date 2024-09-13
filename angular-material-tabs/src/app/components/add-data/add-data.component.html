@@ -1,0 +1,18 @@
+<form [formGroup]="dataForm" (ngSubmit)="addData()">
+  <mat-form-field appearance="fill">
+    <mat-label>Date and Time</mat-label>
+    <input matInput formControlName="datetime" [matDatepicker]="picker" placeholder="Choose a date" />
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="dataForm.get('datetime')?.hasError('required')">Date and time is required.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Temperature (°C)</mat-label>
+    <input matInput formControlName="temperature" type="number" placeholder="Enter temperature" />
+    <mat-error *ngIf="dataForm.get('temperature')?.hasError('required')">Temperature is required.</mat-error>
+    <mat-error *ngIf="dataForm.get('temperature')?.hasError('min')">Temperature must be at least -50°C.</mat-error>
+    <mat-error *ngIf="dataForm.get('temperature')?.hasError('max')">Temperature cannot exceed 50°C.</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Add Data</button>
+</form>
